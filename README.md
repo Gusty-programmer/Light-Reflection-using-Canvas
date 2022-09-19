@@ -11,8 +11,8 @@ This project is currently in development. This is an e-learning model. The light
 ## Screenshots
 <p>
 <img src = "prscr1l.png"  alt ="screenshot" width = "250"/>
-<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas/blob/master/prscr2l.png"  alt ="screenshot" width = "250"/>
-<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas/blob/master/prscr3l.png"  alt ="screenshot" width = "250"/>
+<img src = "prscr2l.png"  alt ="screenshot" width = "250"/>
+<img src = "prscr3l.png"  alt ="screenshot" width = "250"/>
 
 ## Tech Stack
 
