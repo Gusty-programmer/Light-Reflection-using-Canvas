@@ -10,7 +10,9 @@ This project is currently in development. This is an e-learning model. The light
 
 ## Screenshots
 <p>
-<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas animation/blob/master/src/Img/printscreen/prscr1l.png"  alt ="screenshot" width = "350"/>
+<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas /blob/master/src/Img/printscreen/prscr1l.png"  alt ="screenshot" width = "250"/>
+<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas /blob/master/src/Img/printscreen/prscr2l.png"  alt ="screenshot" width = "250"/>
+<img src = "https://github.com/Gusty-programmer/Light Reflection using Canvas /blob/master/src/Img/printscreen/prscr3l.png"  alt ="screenshot" width = "250"/>
 
 ## Tech Stack
 
