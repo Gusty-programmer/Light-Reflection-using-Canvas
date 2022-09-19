@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: hidden;
+    background-color: #333;
+    font-family: 'Courier New', Courier, monospace;
+}
+#canvas1{
+    position: absolute;
+    top: 10;
+    left: 10;  
+}
+.theory{
+    position: absolute;
+    width: 500px;
+    top: 10px;
+    left: 20px;
+    color: rgb(228, 227, 167);
+    padding: 5px;
+    text-shadow: 1px 1px 1px rgb(114, 180, 206);
+    line-height: 1.1rem;
+}
+h1{
+    margin: 10px;
+}
+p{
+    
+    padding-left: 10px;
+    text-indent: -15px;
+}
+p span{
+    font-weight: bold;
+}
+ul{
+    padding-left: 30px;
+}
