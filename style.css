@@ -15,16 +15,27 @@ body{
 }
 .theory{
     position: absolute;
-    width: 500px;
+    display: flex;
+    width: 100%px;
     top: 10px;
     left: 20px;
     color: rgb(228, 227, 167);
     padding: 5px;
-    text-shadow: 1px 1px 1px rgb(114, 180, 206);
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
     line-height: 1.1rem;
+}
+.theory div{
+    width: 50%;
+    padding: 10px;
+    align-content: center;
+}
+.theory div:nth-child(2) h1{
+    
+    text-align: right;
 }
 h1{
     margin: 10px;
+    
 }
 p{
     
@@ -33,6 +44,9 @@ p{
 }
 p span{
     font-weight: bold;
+}
+i{
+    color: red;
 }
 ul{
     padding-left: 30px;
@@ -44,49 +58,153 @@ ul{
     width: 50%;
     height: 100%;
     /* background-color: rgba(200,200,200,0.8) ; */
-    background-image: url('blur1.png');
+    background-image: url('./img/blur1.png');
     filter: blur(5px);
     z-index: 100;
-    display: none;
+    display: block;
+}
+.blur2{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    /* background-color: rgba(200,200,200,0.8) ; */
+    background-image: url('./img/blur2.png');
+    filter: blur(5px);
+    z-index: 100;
+    display: none; 
 }
 .toggle{
     position: absolute;
     top: 0;
     left: 50%;
     translate: -50%;
-    width: 200px;
+    width: 300px;
     height: 50px;
     background-color: black;
     border-radius: 0px 0px 30px 30px;
     box-shadow: 0px 2px 2px rgb(78, 77, 77);
     z-index: 110;
 }
-.toggle::before{
-     content: "";
+.toggle div:nth-child(1){
+     /* content: " Reflection"; */
     position: absolute;
-    top: 15px;
-    left: 30px;
-    width: 125px;
-    height: 20px;
-    box-shadow: inset 0px 2px 2px grey;
-    background: linear-gradient(to right, green, red);
+    top: 10px;
+    left: 0px;
+    width: 50%;
+    height: 25px;
+    padding-left: 5px;
+    
+    background: linear-gradient(to bottom, rgb(54, 59, 54) ,
+     rgb(88, 86, 86),rgb(54, 59, 54));
+     border-radius: 4px;
+    text-shadow: 0px 0px 2px black;
+     padding-left: 10px;         
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: rgb(49, 58, 49);
+    transition: 0.8s;
 }
-.toggle::after{
+.toggle div:nth-child(2){
+    
+   position: absolute;
+   top: 10px;
+   left: 50%;
+   width: 50%;
+   height: 25px;
+   padding-left: 5px;
+   background: linear-gradient(to bottom, rgb(54, 59, 54) ,
+   rgb(88, 86, 86),rgb(54, 59, 54));
+   text-shadow: 0px 0px 2px black,
+                2px 2px 2px rgb(4, 66, 4),
+                2px 2px 3px rgb(4, 49, 4),
+                2px 2px 4px white,
+                -1px -1px 2px white;
+     color: green;  
+     font-weight: bolder;         
+    font-size: 1.3rem;
+    box-shadow: 1px -2px 4px white,
+                1px -5px 9px greenyellow;
+   /* border-radius: 0px 0px 8px 8px; */
+   background-color: black;
+   border-radius: 4px;
+   transition: 0.8s;
+}
+.toggle::before{
     content: "";
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 150px;
-    width: 40px;
+    width: 150px;
     height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, rgb(241, 116, 116),rgb(196, 120, 120));
-    box-shadow: inset 0 3px 3px rgba(255, 0, 0, 0.3), 
-                inset 0 -3px 3px rgba(255, 0, 0, 0.3) ;
-    transition: 0.5s;
-}
-.toggle:active::after{
+    border-radius: 0px 0px 20px 20px;
     background: linear-gradient(to bottom, rgb(7, 156, 27),rgb(160, 190, 147));
     box-shadow: inset 0 3px 3px rgba(0, 250, 0, 0.3), 
                 inset 0 -3px 3px rgba(0, 250, 0, 0.3) ;
-    left: 10px;
+    /* background: linear-gradient(to bottom, rgb(241, 116, 116),rgb(196, 120, 120)); */
+    box-shadow: inset 0 3px 3px rgba(7, 65, 7, 0.5), 
+                inset 0 -3px 3px rgba(7, 65, 7, 0.5) ;
+    transition: 0.4s;
+}
+.toggle.active::before{
+    
+    left: 0px;
+}
+.toggle.active div:nth-child(1){
+    /* content: ".............Refraction"; */
+    text-shadow: 0px 0px 2px black,
+                2px 2px 2px rgb(4, 66, 4),
+                2px 2px 3px rgb(4, 49, 4),
+                2px 2px 4px white,
+                -1px -1px 2px white;
+     color: green;           
+    font-size: 1.3rem;
+    box-shadow: 1px -2px 4px white,
+                1px -5px 9px greenyellow;
+    /* background: linear-gradient(to right,  grey 50%,green 50%) */
+}
+.toggle.active div:nth-child(2){
+    text-shadow: 0px 0px 2px black;  
+    box-shadow: none;       
+    font-size: 1.2rem;
+    color: rgb(49, 58, 49);
+    box-shadow: inset -2px 0px 4px rgb(88, 86, 86);
+   
+}
+.lightbtn{
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px; 
+    
+}
+.lightbtn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%);
+    border-radius: 30%;
+}
+.lightbtn::after{
+    content: "LIGHT";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 20px;
+    border-radius: 30%;
+    background: linear-gradient(rgba(14,14,14,0.6) 0%, rgba(124, 124, 124,0.6) 100%);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.lightbtn:active::after{
+    box-shadow: inset 0px 2px 2px rgba(14,14,14,0.6);
+    color: rgb(93, 95, 97);
+    text-shadow: 1px 1px 2px aliceblue;
 }

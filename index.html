@@ -10,11 +10,12 @@
     <body>
         <div>
             <div class="theory">
+                <div>
               <h1>Light reflection</h1>  
               <p><span> Light reflection</span> is the phenomenon of changing the direction of light
-                 propagation at the surface separating two media, the light returning
-                 to the medium from which it came. It appears at the interface between 
-                 two optical media.</p>
+                propagation at the surface separating two media, the light returning
+                to the medium from which it came. It appears at the interface between 
+                two optical media.</p>
                  <p><span>The laws of reflection</span><br>
                     <ul>There are two laws:
                         <li>The incident light ray, the reflected light ray, and the normal to the surface 
@@ -22,10 +23,28 @@
                         <li>The angle of reflection <i>r</i> is equal to the angle of incidence <i>i</i>.</li>
                     </ul>  
                     </p>
+                </div>
+                <div>
+                    <h1>Light refraction</h1> 
+                    <p><span> Light refraction</span> Changing the direction of light propagation when passing
+                        from a transparent medium to another transparent medium.</p> 
+                       <p><span>The laws of reflection</span><br>
+                          <ul>There are two laws:
+                              <li>The incident light ray, the reflected light ray, and the normal to the surface 
+                          are coplanar at the point of incidence.</li>
+                              <li>The angle of reflection <i>r</i> is not equal to the angle of incidence <i>i</i>.</li>
+                          </ul>  
+                          </p>
+                      </div>
             </div>
             <canvas id="canvas1"></canvas>
-            <div class="blur"></div>
-            <div class="toggle"></div>
+            <div class="blur" id="blur1"></div>
+            <div class="blur2" id="blur2"></div>
+            <div class="toggle">
+                <div>Reflection</div>
+                <div>Refraction</div>
+            </div>
+            <div class="lightbtn" id="lightbtn"></div>
         </div>
         <script src="script.js"></script>
     </body>

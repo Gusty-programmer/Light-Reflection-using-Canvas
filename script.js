@@ -4,8 +4,8 @@ canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 const heightTheory = 300
 let thetaxy = 0
-let thetaxyrefr = 0
-let thetaxyrefr2 = 0
+let thetaxyrefr = -Math.PI/2
+let thetaxyrefr2 = Math.PI/2
 let thetabec = 0
 let thetaxy2 = -Math.PI/2
 let grade = 0
@@ -22,26 +22,42 @@ let imgY = 200 +heightTheory
 let xLight = imgX +20
 let yLight =imgY //+20
 const steps = 20
+let active = false
+let light = false
+let info = false
+const imgblur1 = document.getElementById('blur1')
+const imgblur2 = document.getElementById('blur2')
 const btntoggle = document.querySelector('.toggle')
-btntoggle.addEventListener('click', () => btntoggle.classList.toggle('active'))
+btntoggle.addEventListener('click', () => {
+    btntoggle.classList.toggle('active')
+    if (!active) {
+        imgblur1.style.display = 'none'
+        imgblur2.style.display = 'block'
+       
+    } else {
+      imgblur1.style.display = 'block'
+      imgblur2.style.display = 'none' 
+    }
+    active = !active 
+})
 
 let sourceArray = []
 let lineArray = []
 let change = false
 
 const bec = new Image()
-bec.src = 'becTransp.png'
+bec.src = './img/becTransp.png'
 function drawbec() {
 ctx.shadowBlur = 0;
 ctx.drawImage(bec, imgX, imgY, 40, 40)
 }
-function drawNorm() {
+function drawNorm(x,y) {
     ctx.strokeStyle = 'red'
     ctx.lineWidth = 2
     ctx.beginPath()
     ctx.setLineDash([15, 5]);
-    ctx.moveTo(centerbase, yb)
-    ctx.lineTo(centerbase, 15 + heightTheory)
+    ctx.moveTo(x, y)
+    ctx.lineTo(x, heightTheory + 15)
     ctx.stroke()
 }
 function angle() {
@@ -52,25 +68,27 @@ function angle() {
     if (grade === grade2) {
         ctx.shadowBlur = 5
        ctx.fillText('= ', centerbase -3, yb +30) 
-    }
-    
-   
+    }  
 }
-function drawAngle(a1,a2) {
+
+function drawAngle(x,y,a1,a2) {
     ctx.save();
     ctx.beginPath();
-    ctx.moveTo(centerbase, yb - 6);
+    ctx.moveTo(x, y);
     ctx.fillStyle = "red";
-    ctx.globalAlpha = 0.15;
-    ctx.arc(centerbase, yb - 6, 50, a1, a2);
+    ctx.globalAlpha = 0.35;
+    ctx.arc(x, y, 50, a1, a2);
     ctx.closePath();  
     ctx.fill();
     ctx.restore();
-    ctx.font = "20px Georgia";
-    ctx.fillText('i ', centerbase - 20, yb -60)
-    ctx.fillText('r ', centerbase + 17, yb - 60)
+    
 }
-
+function ir(xi, yi, xr, yr) {
+    ctx.fillStyle = "red";
+    ctx.font = "20px Georgia";
+    ctx.fillText('i ', xi, yi)
+    ctx.fillText('r ', xr , yr)
+}
 
 ctx.strokeStyle = 'green'
     ctx.lineWidth = 1
@@ -96,8 +114,10 @@ window.addEventListener('load', function () {
 window.addEventListener('click', function(e) {
     mouse.clickX = e.x
     mouse.clickY = e.y
-    change = true
-    thetaxy2 = -Math.PI/2
+    if (mouse.clickX < canvas.width / 2 && mouse.clickY > heightTheory) {
+        change = true 
+        thetaxy2 = -Math.PI / 2
+    }
    
 }) 
     function drawBase() {   //linia baza rosie
@@ -257,10 +277,30 @@ window.addEventListener('click', function(e) {
     }
 
     //Refraction
+    const bec2 = new Image()
+bec2.src = './img/bec1.png'
+    function drawbec2() {
+        ctx.shadowBlur = 0;
+        ctx.drawImage(bec2, waterx-20, yb/2-20, 40, 40)
+    }
     const waterx = canvas.width / 2 + 100
-    const watery = yb/2
+    const watery = yb - 100
     widthWater = 400
-    const halfWaterx = waterx +widthWater/2
+    const halfWaterx = waterx + widthWater / 2
+    const btnLight = document.getElementById('lightbtn')
+    btnLight.style.top = yb / 2 - 60 + 'px'
+    btnLight.style.left = waterx + 'px'
+    
+    btnLight.addEventListener('click', function () {
+        light = !light
+        if (!light) {
+            lineRefr = new LineRefraction()
+            thetaxyrefr = -Math.PI/2
+            thetaxyrefr2 = Math.PI / 2
+            graderefr = graderefr2 = 0
+            info = false
+        }
+    })
     function drawWater() {
         const grd = ctx.createLinearGradient(canvas.width/2,yb/2,canvas.width/2,yb);
         grd.addColorStop(0,"#33f");
@@ -270,48 +310,57 @@ window.addEventListener('click', function(e) {
         ctx.fillStyle = grd;
         ctx.fillRect(waterx, watery, widthWater,300);
     }
-    
-   
-
+    function angle2() {
+        ctx.font = "20px Georgia";
+        ctx.shadowBlur = 0
+        ctx.fillText('i: ' + graderefr, halfWaterx + 50, yb/2 )
+        ctx.fillText('r: ' + graderefr2, halfWaterx + 120, yb/2 )
+        if (graderefr > graderefr2) {
+            ctx.shadowBlur = 5
+           ctx.fillText('>', halfWaterx + 100, yb/2) 
+        }  
+    }
     class LineRefraction {
         constructor() {
            this.x = waterx
-           this.y = yb/4
+           this.y = yb/2
            this.rx = halfWaterx
            this.ry = watery
            this.refl = false
            this.count = 0
            this.timer = 0
            this.stepX = (halfWaterx-waterx) / steps
-           this.stepY = (watery - yb/4) / steps
+           this.stepY = (watery - yb/2) / steps
         }
         draw() { 
-           ctx.beginPath();
-           ctx.moveTo(waterx, yb/4)
+            ctx.beginPath();
+            ctx.setLineDash([]);
+           ctx.moveTo(waterx, yb/2)
            ctx.lineWidth = 5
-           ctx.shadowBlur = 8;
+           ctx.shadowBlur = 5;
            ctx.shadowColor = "#ffd";
            ctx.strokeStyle = '#fff'
            ctx.lineTo(this.x, this.y);       
            ctx.stroke();     
            ctx.closePath()
-           if (this.refl === true) {
+           if (this.refl) {
            ctx.beginPath();
            ctx.moveTo(halfWaterx, watery)
            ctx.lineWidth = 5
-           ctx.shadowBlur = 8;
+           ctx.shadowBlur = 5;
            ctx.shadowColor = "#ffd";
            ctx.strokeStyle = '#fff'
            ctx.lineTo(this.rx, this.ry);       
            ctx.stroke(); 
-           }
+            }
+            
         }
         update() {   
             let dx =waterx - halfWaterx
-            let dy = yb/4 - yb 
+            let dy = yb/2 -watery 
             let theta = Math.atan2(dy, dx)
             thetaxyrefr =theta
-            graderefr = (90- (theta*180/Math.PI +180)).toFixed(2)
+            graderefr = parseInt(90- (theta*180/Math.PI +180))
               this.timer ++
             if (this.timer % 4 == 0) {
               this.count ++
@@ -321,6 +370,7 @@ window.addEventListener('click', function(e) {
                }
                if (this.count > steps && this.count <= steps * 1.6) {
                    this.refl = true
+                   
                this.x = this.x
                this.y = this.y
                this.rx += this.stepX
@@ -329,13 +379,14 @@ window.addEventListener('click', function(e) {
                    let dy2 = this.ry - watery 
                    let theta2 = Math.atan2(dy2, dx2) 
                    thetaxyrefr2 = theta2
-                   graderefr2 = ((theta2*180/Math.PI +180) -90).toFixed(2)
+                   graderefr2 = parseInt(90 - (theta2*180/Math.PI ))
              } 
              if (this.count > steps * 1.6) {
                this.stepX = 0
                this.stepY = 0
                this.count = this.count
-               this.timer =this.timer
+                 this.timer = this.timer
+                 info = true
                }
              }   
            }
@@ -356,7 +407,7 @@ window.addEventListener('click', function(e) {
         
     }
     init()
-    const lineRefr = new LineRefraction()
+    let lineRefr = new LineRefraction()
     
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height) 
@@ -365,7 +416,7 @@ window.addEventListener('click', function(e) {
             sourceArray[i].draw()
             sourceArray[i].update()
         }
-        drawNorm()
+        drawNorm(centerbase, yb, 15+heightTheory)
         drawBase()
         
         lighter.update()
@@ -374,11 +425,26 @@ window.addEventListener('click', function(e) {
             lineArray[0].update()
         
         angle()
-        drawAngle(thetaxy, -Math.PI / 2)
-        drawAngle(-Math.PI / 2, thetaxy2)
+        drawAngle(centerbase, yb - 6, thetaxy, -Math.PI / 2)
+        drawAngle(centerbase, yb - 6, -Math.PI / 2, thetaxy2)
+        ir(centerbase - 20, yb -60, centerbase + 17, yb - 60)
         drawWater()
-        lineRefr.draw()
-        lineRefr.update()
+        drawbec2()
+        drawNorm(halfWaterx, yb + 150)
+        
+        if (light) {
+            lineRefr.draw() 
+          
+            if (info) {
+                drawAngle(halfWaterx, watery, thetaxyrefr, -Math.PI / 2)
+                drawAngle(halfWaterx, watery, thetaxyrefr2, Math.PI / 2)
+                ir(halfWaterx -20, watery -60, halfWaterx + 10, watery +65)  
+                angle2()
+            }
+        
+        lineRefr.update()  
+        }
+        
       requestAnimationFrame(animate)
     }
     animate()

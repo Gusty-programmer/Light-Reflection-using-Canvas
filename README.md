@@ -10,10 +10,10 @@ This project is currently in development. This is an e-learning model. The light
 
 ## Screenshots
 <p>
-<img src = "prscr1l.png"  alt ="screenshot" width = "250"/>
-<img src = "prscr2l.png"  alt ="screenshot" width = "250"/>
-<img src = "prscr3l.png"  alt ="screenshot" width = "250"/>
-<img src = "Refl.gif"  alt ="screenshot" width = "250"/>
+<img src = "./img/prscr1l.png"  alt ="screenshot" width = "350"/>
+<img src = "./img/prscr2l.png"  alt ="screenshot" width = "350"/>
+
+<img src = "./img/Refl1.gif"  alt ="screenshot" width = "250"/>
 
 ## Tech Stack
 
